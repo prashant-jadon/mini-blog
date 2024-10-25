@@ -6,29 +6,55 @@
     <title>Single Blog</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #ecf0f1; /* Light gray background */
+            color: #34495e; /* Darker text color */
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content */
         }
 
         h1 {
             text-align: center;
-            color: #2c3e50;
-            margin-bottom: 20px;
+            color: #2980b9; /* Blue color for title */
+            margin-bottom: 10px; /* Reduced margin for better spacing */
             font-size: 2.5em; /* Responsive font size */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .username {
+            color: #7f8c8d; /* Gray color for username */
+            font-style: italic;
+            margin-bottom: 20px; /* Space below the username */
         }
 
         p {
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: #ffffff; /* White background for content */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             max-width: 800px; /* Max width for larger screens */
             margin: 0 auto; /* Center the content */
             font-size: 1.2em; /* Increase font size for content */
+            transition: transform 0.2s; /* Animation for scaling */
+        }
+
+        p:hover {
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+
+        /* Add a decorative border */
+        p::before {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 5px;
+            background: #e74c3c; /* Red color for decorative line */
+            margin-bottom: 15px;
+            border-radius: 5px;
         }
 
         /* Responsive adjustments */
@@ -37,8 +63,12 @@
                 font-size: 2em; /* Smaller title on smaller screens */
             }
 
+            .username {
+                font-size: 1em; /* Adjust font size for smaller screens */
+            }
+
             p {
-                padding: 10px;
+                padding: 15px;
                 font-size: 1em; /* Adjust font size for smaller screens */
             }
         }
@@ -56,6 +86,7 @@
 </head>
 <body>
     <h1 id="blog-title">Blog Title Goes Here</h1>
+    <div class="username" id="username">Username Goes Here</div>
     <p id="blog-content">This is where the blog content will appear.</p>
 
     <script>
@@ -78,6 +109,7 @@
                 })
                 .then(data => {
                     document.getElementById('blog-title').textContent = data.title;
+                    document.getElementById('username').textContent = `Posted by: ${data.username}`; // Display username
                     document.getElementById('blog-content').textContent = data.content;
                 })
                 .catch(err => {

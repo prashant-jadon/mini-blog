@@ -86,6 +86,18 @@ app.get('/api/blogs/:id', (req, res) => {
     });
 });
 
+// New route for user to post a blog without authentication
+app.post('/api/user-blogs', (req, res) => {
+    const { username, title, content } = req.body; // Destructure username, title, and content from the request body
+    const sql = 'INSERT INTO blogs (username, title, content) VALUES (?, ?, ?)';
+    
+    db.query(sql, [username, title, content], (err, result) => {
+        if (err) throw err;
+        res.json({ message: 'Blog posted successfully!', blogId: result.insertId });
+    });
+});
+
+
 
 // Route to serve admin page (only for authenticated users)
 app.get('/admin.html', isAuthenticated, (req, res) => {
