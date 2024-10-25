@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.5em; /* Responsive font size */
+        }
+
+        p {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Max width for larger screens */
+            margin: 0 auto; /* Center the content */
+            font-size: 1.2em; /* Increase font size for content */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em; /* Smaller title on smaller screens */
+            }
+
+            p {
+                padding: 10px;
+                font-size: 1em; /* Adjust font size for smaller screens */
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em; /* Even smaller title */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="blog-title">Blog Title Goes Here</h1>
+    <p id="blog-content">This is where the blog content will appear.</p>
+
+    <script>
+        // Function to get query parameter (ID from URL)
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const blogId = getQueryParam('id');  // Get blog ID from URL
+
+        if (blogId) {
+            // Fetch single blog data using the blog ID
+            fetch(`/api/blogs/${blogId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Blog not found');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('blog-title').textContent = data.title;
+                    document.getElementById('blog-content').textContent = data.content;
+                })
+                .catch(err => {
+                    console.error('Error fetching blog:', err);
+                    document.body.innerHTML = '<h2>Blog not found</h2>';
+                });
+        } else {
+            document.body.innerHTML = '<h2>No blog ID provided in URL</h2>';
+        }
+    </script>
+</body>
+</html>

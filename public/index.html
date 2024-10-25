@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive meta tag -->
+    <title>Mini Blogs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.5em; /* Responsive font size */
+        }
+
+        #blog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Space between blog items */
+            max-width: 800px; /* Max width for larger screens */
+            margin: 0 auto; /* Center the list */
+        }
+
+        .blog-item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .blog-item:hover {
+            transform: translateY(-5px); /* Subtle lift effect on hover */
+        }
+
+        .blog-title {
+            font-size: 1.8em;
+            color: #34495e;
+            margin: 0;
+        }
+
+        .blog-excerpt {
+            margin-top: 10px;
+            color: #7f8c8d;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em; /* Smaller title on smaller screens */
+            }
+
+            .blog-item {
+                padding: 10px;
+            }
+
+            .blog-title {
+                font-size: 1.5em; /* Smaller title inside blog item */
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em; /* Even smaller title */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Mini Blog</h1>
+    <div id="blog-list">
+        <!-- Blog items will be dynamically added here -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
